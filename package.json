@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",package.json 
+    "build": "next build",
     "start": "next start",
     "vercel-build": "next build"
   },
