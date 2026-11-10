@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
     if (!apiKey) {
       return Response.json(
-        { error: "Clé API manquante sur Vercel." },
+        { error: "OPENAI_API_KEY manquante sur Vercel." },
         { status: 500 }
       );
     }
@@ -28,10 +28,10 @@ export async function POST(request: Request) {
           Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: "gpt-image-2.5-flare",
+          model: "gpt-image-1",
           prompt,
           size: "1024x1024",
-          n: 1,
+          n: 1
         }),
       }
     );
@@ -45,11 +45,11 @@ export async function POST(request: Request) {
       );
     }
 
-    const imageUrl =
-      "data:image/png;base64," + result.data[0].b64_json;
+    return Response.json({
+      imageUrl: "data:image/png;base64," + result.data[0].b64_json
+    });
 
-    return Response.json({ imageUrl });
-  } catch {
+  } catch (error) {
     return Response.json(
       { error: "Erreur du serveur." },
       { status: 500 }
